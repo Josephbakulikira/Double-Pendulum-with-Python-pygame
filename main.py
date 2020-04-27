@@ -4,7 +4,6 @@ import math
 import random
 from points import *
 import formular
-from decimal import *
 
 os.environ['SDL_VIDEO_CENTERED']='1'
 
@@ -12,7 +11,7 @@ width, height = 1920, 1080
 SIZE = (width, height)
 pygame.init()
 pygame.display.set_caption("Double Pendulum")
-fps = 60
+fps = 30
 screen = pygame.display.set_mode(SIZE)
 clock = pygame.time.Clock()
 
@@ -22,8 +21,8 @@ black = (0, 0, 0)
 
 mass1 = 40
 mass2 = 40
-length1 = 350
-length2 = 350
+length1 = 200
+length2 = 200
 
 angle1 = math.pi/2
 angle2 = math.pi/2
@@ -76,12 +75,14 @@ while run:
         plot = Points(point[0], point[1], screen, white, scatter2)
         plot.draw()
 
-    pygame.draw.line(screen, white, starting_point, (x1, y1), 8)
+    pygame.draw.line(screen, white, starting_point, (x1, y1), 6)
+
+
+    pygame.draw.line(screen, white, (x1, y1), (x2, y2), 6)
+    pygame.draw.circle(screen, white, (int(x2), int(y2)), 10)
     pygame.draw.circle(screen, (20, 200, 30), (int(x1), int(y1)), 20)
-
-    pygame.draw.line(screen, white, (x1, y1), (x2, y2), 8)
-    pygame.draw.circle(screen, white, (int(x2), int(y2)), 25)
-
+    if len(scatter1) > 1:
+        pygame.draw.lines(screen, (100, 50, 100), False, scatter1, 1)
     pygame.display.update()
 
 pygame.quit()
