@@ -49,6 +49,9 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                run = False
 
     # calculate the acceleration
     angle_acceleration1 = formular.FirstAcceleration(angle1, angle2, mass1, mass2, length1, length2, Gravity, angle_velocity1, angle_velocity2)
@@ -66,14 +69,21 @@ while run:
     angle1 += angle_velocity1
     angle2 += angle_velocity2
 
-    scatter1.append((x1, y1))
-    scatter2.append((x2, y2))
+    scatter1.insert(0, (x1, y1))
+    scatter2.insert(0, (x2, y2))
+    #scatter1.append((x1, y1))
+    #scatter2.append((x2, y2))
 
 
     for point in scatter2:
         random_color = (random.randint(20, 255), random.randint(20, 255), random.randint(20, 255))
         plot = Points(point[0], point[1], screen, white, scatter2)
         plot.draw()
+
+    if len(scatter1) > 100:
+        scatter1.pop()
+    if len(scatter2) > 100:
+        scatter2.pop()
 
     pygame.draw.line(screen, white, starting_point, (x1, y1), 6)
 
