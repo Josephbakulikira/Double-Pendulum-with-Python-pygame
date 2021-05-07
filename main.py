@@ -86,13 +86,13 @@ while run:
         scatter2.pop()
 
     pygame.draw.line(screen, white, starting_point, (x1, y1), 6)
-
+    if len(scatter1) > 1:
+        pygame.draw.lines(screen, (100, 50, 100), False, scatter1, 1)
 
     pygame.draw.line(screen, white, (x1, y1), (x2, y2), 6)
     pygame.draw.circle(screen, white, (int(x2), int(y2)), 10)
     pygame.draw.circle(screen, (20, 200, 30), (int(x1), int(y1)), 20)
-    if len(scatter1) > 1:
-        pygame.draw.lines(screen, (100, 50, 100), False, scatter1, 1)
+
     pygame.display.update()
 
 pygame.quit()
