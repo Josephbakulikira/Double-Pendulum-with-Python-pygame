@@ -34,6 +34,7 @@ Gravity = 8
 scatter1 = []
 scatter2 = []
 
+LIST_LIMIT = 100
 
 starting_point = (int(width/2) , int(height/4))
 
@@ -80,9 +81,9 @@ while run:
         plot = Points(point[0], point[1], screen, white, scatter2)
         plot.draw()
 
-    if len(scatter1) > 100:
+    if len(scatter1) > LIST_LIMIT:
         scatter1.pop()
-    if len(scatter2) > 100:
+    if len(scatter2) > LIST_LIMIT:
         scatter2.pop()
 
     pygame.draw.line(screen, white, starting_point, (x1, y1), 6)

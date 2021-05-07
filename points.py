@@ -9,4 +9,4 @@ class Points:
         self.coordinates = coordinates
     def draw(self):
         if len(self.coordinates) > 2:
-            pygame.draw.lines(self.surface, self.colors, False, self.coordinates, 2)
+            pygame.draw.lines(self.surface, self.colors, False, self.coordinates, 4)
