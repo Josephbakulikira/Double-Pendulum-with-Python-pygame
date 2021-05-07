@@ -15,9 +15,6 @@ fps = 30
 screen = pygame.display.set_mode(SIZE)
 clock = pygame.time.Clock()
 
-#colors
-white = (255, 255 , 255)
-black = (0, 0, 0)
 
 mass1 = 40
 mass2 = 40
@@ -36,7 +33,16 @@ scatter2 = []
 
 LIST_LIMIT = 100
 
-starting_point = (int(width/2) , int(height/4))
+#COLORS
+BACKGROUND = (20, 20, 20)
+SCATTERLINE1 = (255, 255, 255)
+SCATTERLINE2 = (255, 255, 0)
+MAINPOINT = (0, 255, 0)
+SMALLPOINT = (0, 255, 255)
+PENDULUMARM = (45, 140, 245)
+ARMSTROKE = 10
+
+starting_point = (width//2 , height//3 )
 
 x_offset = starting_point[0]
 y_offset = starting_point[1]
@@ -46,7 +52,7 @@ run = True
 while run:
     clock.tick(fps)
 
-    screen.fill(black)
+    screen.fill(BACKGROUND)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -78,7 +84,7 @@ while run:
 
     for point in scatter2:
         random_color = (random.randint(20, 255), random.randint(20, 255), random.randint(20, 255))
-        plot = Points(point[0], point[1], screen, white, scatter2)
+        plot = Points(point[0], point[1], screen, SCATTERLINE1, scatter2)
         plot.draw()
 
     if len(scatter1) > LIST_LIMIT:
@@ -86,13 +92,16 @@ while run:
     if len(scatter2) > LIST_LIMIT:
         scatter2.pop()
 
-    pygame.draw.line(screen, white, starting_point, (x1, y1), 6)
-    if len(scatter1) > 1:
-        pygame.draw.lines(screen, (100, 50, 100), False, scatter1, 1)
+    pygame.draw.line(screen, PENDULUMARM, starting_point, (x1, y1), ARMSTROKE)
+    pygame.draw.circle(screen, SMALLPOINT, starting_point, 8)
 
-    pygame.draw.line(screen, white, (x1, y1), (x2, y2), 6)
-    pygame.draw.circle(screen, white, (int(x2), int(y2)), 10)
-    pygame.draw.circle(screen, (20, 200, 30), (int(x1), int(y1)), 20)
+    if len(scatter1) > 1:
+        pygame.draw.lines(screen, SCATTERLINE2, False, scatter1, 1)
+
+    pygame.draw.line(screen, PENDULUMARM, (x1, y1), (x2, y2), ARMSTROKE)
+
+    pygame.draw.circle(screen, SMALLPOINT, (int(x2), int(y2)), 10)
+    pygame.draw.circle(screen, MAINPOINT, (int(x1), int(y1)), 20)
 
     pygame.display.update()
 
