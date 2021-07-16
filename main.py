@@ -31,6 +31,8 @@ Gravity = 8
 scatter1 = []
 scatter2 = []
 
+restart = False
+
 LIST_LIMIT = 100
 
 #COLORS
@@ -59,6 +61,20 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 run = False
+            if event.key == pygame.K_r:
+                restart = True
+
+    if restart == True:
+        angle1 = math.pi/2
+        angle2 = math.pi/2
+        angle_velocity1 = 0
+        angle_velocity2 = 0
+        angle_acceleration1 = 0
+        angle_acceleration2 = 0
+        scatter1 = []
+        scatter2 = []
+        restart = False
+
 
     # calculate the acceleration
     angle_acceleration1 = formular.FirstAcceleration(angle1, angle2, mass1, mass2, length1, length2, Gravity, angle_velocity1, angle_velocity2)
